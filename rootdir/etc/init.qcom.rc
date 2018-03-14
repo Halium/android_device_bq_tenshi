@@ -455,6 +455,7 @@ service config_bt_addr /system/bin/btnvtool -O
     user bluetooth
     group bluetooth radio
     oneshot
+    disabled
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
@@ -487,12 +488,13 @@ service qti /system/vendor/bin/qti
     class main
     user radio
     group radio net_raw qcom_diag usb net_admin
+    disabled
 
 service sensors /system/bin/sensors.qcom
     class core
     user root
     group root
-    disabled
+    #disabled
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -556,6 +558,7 @@ service atfwd /system/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
+    disabled
 
 service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
     class late_start
@@ -570,6 +573,7 @@ service ril-daemon2 /system/bin/rild -c 2
     socket rild-debug2 stream 660 radio system
     user root
     group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log
+    disabled
 
 service charger /charger
     class charger
@@ -682,6 +686,7 @@ service wcnss-service /system/bin/wcnss_service
     user system
     group system wifi radio
     oneshot
+    disabled
 
 service ppd /system/vendor/bin/mm-pp-dpps
     class late_start
@@ -738,6 +743,7 @@ service mdtpd /system/vendor/bin/mdtpd
     class late_start
     user root
     group system radio drmrpc
+    disabled
 
 on property:vold.decrypt=trigger_restart_min_framework
     start time_daemon
