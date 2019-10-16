@@ -119,7 +119,8 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    fingerprintd
+    fingerprintd \
+    fingerprint.msm8937
 
 # FM
 PRODUCT_PACKAGES += \
@@ -191,6 +192,10 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
+# NFC config
+PRODUCT_PACKAGES += \
+    nfc_nci.msm8937
+
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -261,3 +266,57 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
+
+# Wakelock
+    use.voice.path.for.pcm.voip=true \
+    ro.qc.sensors.wl_dis=true
+
+# UBPorts config files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ubuntu/70-tenshi.rules:system/lib/udev/rules.d/70-tenshi.rules \
+    #$(LOCAL_PATH)/ubuntu/unblock_wakelock.sh:system/etc/unblock_wakelock.sh \
+    $(LOCAL_PATH)/ubuntu/tenshi.conf:system/etc/ubuntu-touch-session.d/tenshi.conf \
+    $(LOCAL_PATH)/ubuntu/anbox.sh:home/phablet/anbox.sh \
+    $(LOCAL_PATH)/ubuntu/fix_pulseaudio.sh:home/phablet/pa.sh \
+    $(LOCAL_PATH)/ubuntu/fix_prop.sh:system/etc/init/fix_prop.sh \
+    $(LOCAL_PATH)/ubuntu/libs/libizat_core.so:system/lib/libizat_core.so \
+    $(LOCAL_PATH)/ubuntu/switch:system/halium/usr/share/h2w/switch \
+    $(LOCAL_PATH)/ubuntu/timekeeper.conf:system/etc/init/timekeeper.conf \
+    $(LOCAL_PATH)/ubuntu/ofono.override:system/etc/init/ofono.override \
+    $(LOCAL_PATH)/ubuntu/touch.pa:system/etc/pulse/touch.pa \
+    $(LOCAL_PATH)/ubuntu/pre-start.sh:system/var/lib/lxc/android/rootfs \
+    $(LOCAL_PATH)/ubuntu/bluetooth-touch-tenshi.conf:system/etc/init/bluetooth-touch-tenshi.conf \
+    $(LOCAL_PATH)/ubuntu/droid-hcismd-up.sh:system/usr/share/bluetooth-touch/tenshi \
+    $(LOCAL_PATH)/ubuntu/unblock_wakelock.sh:system/etc/unblock_wakelock.sh \
+    $(LOCAL_PATH)/ubuntu/apparmor.d/local/usr.bin.media-hub-server:system/etc/apparmor.d/local/usr.bin.media-hub-server \
+    $(LOCAL_PATH)/ubuntu/apparmor.d/abstractions/base:system/etc/apparmor.d/abstractions/base
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.qti_bsp.abi=1
+
+# Ubuntu
+PRODUCT_PACKAGES += \
+    libubuntu_application_api \
+    direct_ubuntu_application_sensors_c_api_for_hybris_test \
+    direct_ubuntu_application_sensors_for_hybris_test \
+    direct_ubuntu_application_gps_c_api_for_hybris_test \
+    libcameraservice \
+    libdroidmedia \
+    libcamera_compat_layer \
+    libmedia_compat_layer \
+    libui_compat_layer \
+    libsf_compat_layer \
+    minimediaservice \
+    minisfservice \
+    libminisf \
+    libaudioflingerglue \
+    miniafservice
+
+PRODUCT_PACKAGES += \
+    charger_res_images
+
+# telepathy-ofono quirks
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.t-o.quirk.forcesink=1 \
+    ro.t-o.quirk.forcesource=1
+

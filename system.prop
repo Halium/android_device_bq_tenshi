@@ -157,6 +157,7 @@ ro.qualcomm.cabl=2
 
 # RIL
 DEVICE_PROVISIONED=1
+ril.num_slots=2
 ril.subscription.types=NV,RUIM
 rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
