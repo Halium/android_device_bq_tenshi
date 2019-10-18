@@ -136,12 +136,12 @@ PRODUCT_PACKAGES += \
     gps.msm8937
 
 PRODUCT_PACKAGES += \
-    flp.conf \
-    gps.conf \
-    izat.conf \
-    lowi.conf \
-    sap.conf \
-    xtwifi.conf
+    $(LOCAL_PATH)/gps/etc/gps/etc/flp.conf \
+    $(LOCAL_PATH)/gps/etc/gps/gps.conf \
+    $(LOCAL_PATH)/gps/etc/gps/izat.conf \
+    $(LOCAL_PATH)/gps/etc/gps/lowi.conf \
+    $(LOCAL_PATH)/gps/etc/gps/sap.conf \
+    $(LOCAL_PATH)/gps/etc/gps/xtwifi.conf
 
 # Init
 PRODUCT_PACKAGES += \
@@ -274,20 +274,19 @@ PRODUCT_COPY_FILES += \
 # UBPorts config files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ubuntu/70-tenshi.rules:system/lib/udev/rules.d/70-tenshi.rules \
-    #$(LOCAL_PATH)/ubuntu/unblock_wakelock.sh:system/etc/unblock_wakelock.sh \
     $(LOCAL_PATH)/ubuntu/tenshi.conf:system/etc/ubuntu-touch-session.d/tenshi.conf \
     $(LOCAL_PATH)/ubuntu/anbox.sh:home/phablet/anbox.sh \
     $(LOCAL_PATH)/ubuntu/fix_pulseaudio.sh:home/phablet/pa.sh \
     $(LOCAL_PATH)/ubuntu/fix_prop.sh:system/etc/init/fix_prop.sh \
     $(LOCAL_PATH)/ubuntu/libs/libizat_core.so:system/lib/libizat_core.so \
     $(LOCAL_PATH)/ubuntu/switch:system/halium/usr/share/h2w/switch \
-    $(LOCAL_PATH)/ubuntu/timekeeper.conf:system/etc/init/timekeeper.conf \
-    $(LOCAL_PATH)/ubuntu/ofono.override:system/etc/init/ofono.override \
+    #$(LOCAL_PATH)/ubuntu/timekeeper.conf:system/etc/init/timekeeper.conf \
+    #$(LOCAL_PATH)/ubuntu/ofono.override:system/etc/init/ofono.override \
     $(LOCAL_PATH)/ubuntu/touch.pa:system/etc/pulse/touch.pa \
     $(LOCAL_PATH)/ubuntu/pre-start.sh:system/var/lib/lxc/android/rootfs \
-    $(LOCAL_PATH)/ubuntu/bluetooth-touch-tenshi.conf:system/etc/init/bluetooth-touch-tenshi.conf \
-    $(LOCAL_PATH)/ubuntu/droid-hcismd-up.sh:system/usr/share/bluetooth-touch/tenshi \
-    $(LOCAL_PATH)/ubuntu/unblock_wakelock.sh:system/etc/unblock_wakelock.sh \
+    #$(LOCAL_PATH)/ubuntu/bluetooth-touch-tenshi.conf:system/etc/init/bluetooth-touch-tenshi.conf \
+    #$(LOCAL_PATH)/ubuntu/droid-hcismd-up.sh:system/usr/share/bluetooth-touch/tenshi \
+    #$(LOCAL_PATH)/ubuntu/unblock_wakelock.sh:system/etc/unblock_wakelock.sh \
     $(LOCAL_PATH)/ubuntu/apparmor.d/local/usr.bin.media-hub-server:system/etc/apparmor.d/local/usr.bin.media-hub-server \
     $(LOCAL_PATH)/ubuntu/apparmor.d/abstractions/base:system/etc/apparmor.d/abstractions/base
 
@@ -317,6 +316,6 @@ PRODUCT_PACKAGES += \
 
 # telepathy-ofono quirks
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.t-o.quirk.forcesink=1 \
+    ro.t-o.quirk.forcesink=primary_output \
     ro.t-o.quirk.forcesource=1
 

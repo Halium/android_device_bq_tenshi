@@ -111,6 +111,7 @@ ro.fm.transmitter=false
 persist.gps.qc_nlp_in_use=1
 persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
+custom.location.testing=true
 
 # Media
 media.msm8956hw=0
@@ -157,7 +158,6 @@ ro.qualcomm.cabl=2
 
 # RIL
 DEVICE_PROVISIONED=1
-ril.num_slots=2
 ril.subscription.types=NV,RUIM
 rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
@@ -171,6 +171,7 @@ persist.radio.apm_sim_not_pwdn=1
 persist.radio.custom_ecc=1
 persist.radio.sib16_support=1
 persist.radio.mt_sms_ack=20
+ril.num_slots=2
 
 # Time service
 persist.timed.enable=true
