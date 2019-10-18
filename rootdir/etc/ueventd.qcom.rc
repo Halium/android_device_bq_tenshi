@@ -254,7 +254,6 @@
 
 # Fingerprint device
 /dev/qbt1000              0660   system     system
-/dev/fingerprint          0664   system     input
 
 #ImproveTouch device
 /dev/hbtp_input           0660   system     system
@@ -275,6 +274,6 @@
 /sys/devices/7af5000.i2c/i2c-5/5-0045/leds/led:* max_brightness  0666 system system
 /sys/devices/7af5000.i2c/i2c-5/5-0045/leds/led:* brightness      0666 system system
 /sys/devices/7af5000.i2c/i2c-5/5-0045/leds/led:* blink	         0666 system system
-/sys/devices/7af5000.i2c/i2c-5/5-0045pattern_run	         0664 system system
+/sys/devices/7af5000.i2c/i2c-5/5-0045            pattern_run	 0664 system system
 /sys/class/leds/lcd-backlight max_brightness			 0664 root   system
 /sys/class/leds/lcd-backlight brightness                         0664 system system 

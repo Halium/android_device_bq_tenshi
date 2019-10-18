@@ -68,6 +68,7 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libvolumelistener \
     tinymix
 
 # Audio configuration
@@ -104,6 +105,17 @@ PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml
 
+# Camera
+PRODUCT_PACKAGES += \
+    camera.msm8937 \
+    Snap \
+    libcamera_shim
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES  += \
+     persist.camera.shutter.disable=1 \
+     camera.disable_zsl_mode=1 \
+     ro.lirc.dev=/dev/peel_ir
+
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8937 \
@@ -119,8 +131,8 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    fingerprintd \
-    fingerprint.msm8937
+    fingerprint.msm8937 \
+    fingerprintd
 
 # FM
 PRODUCT_PACKAGES += \
@@ -133,15 +145,17 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8937
+    gps.msm8937 \
+    libcurl \
+    libgnsspps
 
 PRODUCT_PACKAGES += \
-    $(LOCAL_PATH)/gps/etc/gps/etc/flp.conf \
-    $(LOCAL_PATH)/gps/etc/gps/gps.conf \
-    $(LOCAL_PATH)/gps/etc/gps/izat.conf \
-    $(LOCAL_PATH)/gps/etc/gps/lowi.conf \
-    $(LOCAL_PATH)/gps/etc/gps/sap.conf \
-    $(LOCAL_PATH)/gps/etc/gps/xtwifi.conf
+    flp.conf \
+    gps.conf \
+    izat.conf \
+    lowi.conf \
+    sap.conf \
+    xtwifi.conf
 
 # Init
 PRODUCT_PACKAGES += \
@@ -196,6 +210,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     nfc_nci.msm8937
 
+
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -247,6 +262,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level-0.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version-1_0_3.xml
 
+# Wakelock
+    use.voice.path.for.pcm.voip=true \
+    ro.qc.sensors.wl_dis=true
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libqsap_sdk \
@@ -267,28 +286,22 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
 
-# Wakelock
-    use.voice.path.for.pcm.voip=true \
-    ro.qc.sensors.wl_dis=true
-
 # UBPorts config files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ubuntu/70-tenshi.rules:system/lib/udev/rules.d/70-tenshi.rules \
     $(LOCAL_PATH)/ubuntu/tenshi.conf:system/etc/ubuntu-touch-session.d/tenshi.conf \
-    $(LOCAL_PATH)/ubuntu/anbox.sh:home/phablet/anbox.sh \
-    $(LOCAL_PATH)/ubuntu/fix_pulseaudio.sh:home/phablet/pa.sh \
+    $(LOCAL_PATH)/ubuntu/anbox.sh:system/etc/init/anbox.sh \
+    $(LOCAL_PATH)/ubuntu/fix_pulseaudio.sh:system/etc/init/fix_pulseaudio.sh \
     $(LOCAL_PATH)/ubuntu/fix_prop.sh:system/etc/init/fix_prop.sh \
     $(LOCAL_PATH)/ubuntu/libs/libizat_core.so:system/lib/libizat_core.so \
     $(LOCAL_PATH)/ubuntu/switch:system/halium/usr/share/h2w/switch \
     #$(LOCAL_PATH)/ubuntu/timekeeper.conf:system/etc/init/timekeeper.conf \
-    #$(LOCAL_PATH)/ubuntu/ofono.override:system/etc/init/ofono.override \
-    $(LOCAL_PATH)/ubuntu/touch.pa:system/etc/pulse/touch.pa \
-    $(LOCAL_PATH)/ubuntu/pre-start.sh:system/var/lib/lxc/android/rootfs \
-    #$(LOCAL_PATH)/ubuntu/bluetooth-touch-tenshi.conf:system/etc/init/bluetooth-touch-tenshi.conf \
-    #$(LOCAL_PATH)/ubuntu/droid-hcismd-up.sh:system/usr/share/bluetooth-touch/tenshi \
-    #$(LOCAL_PATH)/ubuntu/unblock_wakelock.sh:system/etc/unblock_wakelock.sh \
+    $(LOCAL_PATH)/ubuntu/bluetooth-touch-tenshi.conf:system/etc/init/bluetooth-touch-tenshi.conf \
+    $(LOCAL_PATH)/ubuntu/droid-hcismd-up.sh:system/usr/share/bluetooth-touch/tenshi \
     $(LOCAL_PATH)/ubuntu/apparmor.d/local/usr.bin.media-hub-server:system/etc/apparmor.d/local/usr.bin.media-hub-server \
-    $(LOCAL_PATH)/ubuntu/apparmor.d/abstractions/base:system/etc/apparmor.d/abstractions/base
+    $(LOCAL_PATH)/ubuntu/apparmor.d/abstractions/base:system/etc/apparmor.d/abstractions/base \
+    $(LOCAL_PATH)/ubuntu/ofono.override:system/etc/init/ofono.override
+    #$(LOCAL_PATH)/ubuntu/unblock_wakelock.sh:system/etc/unblock_wakelock.sh \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.qti_bsp.abi=1
@@ -311,11 +324,13 @@ PRODUCT_PACKAGES += \
     libaudioflingerglue \
     miniafservice
 
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     charger_res_images
+
+# Droidmedia
+MINIMEDIA_SENSORSERVER_DISABLE := 1
 
 # telepathy-ofono quirks
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.t-o.quirk.forcesink=primary_output \
-    ro.t-o.quirk.forcesource=1
-
+    ro.t-o.quirk.forcesink=sink.primary_output \
+    ro.t-o.quirk.forcesource=source.primary_input

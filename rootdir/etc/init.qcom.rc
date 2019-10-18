@@ -607,12 +607,10 @@ on property:sys.wfdservice=enable
 on property:sys.wfdservice=disable
     stop wfdservice
 
-service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
-    class late_start
-    user system
-    group system
-    writepid /dev/cpuset/system-background/tasks
-    disabled
+#service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
+#    class late_start
+#    user system
+#    group system
 
 service fingerprintd /system/bin/fingerprintd
     class late_start
@@ -669,11 +667,10 @@ service thermal-engine /system/vendor/bin/thermal-engine
     socket thermal-recv-passive-client stream 0666 system system
     group root
 
-service time_daemon /system/bin/time_daemon
-    class main
-    user root
-    group root
-    writepid /dev/cpuset/system-background/tasks
+#service time_daemon /system/bin/time_daemon
+#    class late_start
+#    user root
+#    group root
 
 service audiod /system/bin/audiod
     class late_start
@@ -684,12 +681,6 @@ service wcnss-service /system/bin/wcnss_service
     class main
     user system
     group system wifi radio
-    oneshot
-
-service fix_prop /system/bin/sh /system/etc/init/fix_prop.sh
-    class main
-    user root
-    group root
     oneshot
 
 service ppd /system/vendor/bin/mm-pp-dpps
@@ -754,28 +745,6 @@ on property:vold.decrypt=trigger_restart_min_framework
 on property:vold.decrypt=trigger_restart_framework
     restart time_daemon
 
-service miniafservice /system/bin/miniafservice
-    class core
-    user root
-    group audio
-
-# Logcat dump daemon, dumps logs to logdump partition
-service logdumpd /system/bin/logcat -b all -v threadtime -D -w /dev/block/bootdevice/by-name/logdump
-    class core
-    writepid /dev/cpuset/system-background/tasks
-    seclabel u:r:logdumpd:s0
-    disabled
-
-on property:init.svc.sensorservice=running
-    start unblock_wakelock
-
-service unblock_wakelock /system/bin/sh /system/etc/unblock_wakelock.sh
-    class main
-    user root
-    group root
-    disabled
-    oneshot
-
 service servicemanager /system/bin/servicemanager
     class core
     user system
@@ -803,14 +772,12 @@ service minimedia /system/bin/minimediaservice
 #   hack to make recorded video playback work
     setenv LD_PRELOAD /system/lib/libOmxVdec.so
 
+service miniaf /system/bin/miniafservice
+    class core
+    user root
+    group audio
+
 service minisf /system/bin/minisfservice
     class main
     user system
     group graphics
-
-service miniaf /system/bin/miniafservice
-    class main
-    user system
-    group audio
-
-
