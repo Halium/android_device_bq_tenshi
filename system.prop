@@ -111,6 +111,7 @@ ro.fm.transmitter=false
 persist.gps.qc_nlp_in_use=1
 persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
+custom.location.testing=true
 
 # Media
 media.msm8956hw=0
