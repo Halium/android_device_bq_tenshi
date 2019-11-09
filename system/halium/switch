@@ -12,9 +12,9 @@ if [ "$SWITCH_STATE" == "2" ]; then
 #headset with mic
 elif [ "$SWITCH_STATE" == "1" ]; then
     /usr/bin/pactl --server $PULSE_SERVER set-sink-port sink.primary_output output-wired_headset
-    /usr/bin/pactl --server $PULSE_SERVER set-source-port source.record_24_primary_input input-wired_headset
+    /usr/bin/pactl --server $PULSE_SERVER set-source-port source.surround_sound_primary_input input-wired_headset
 #no headset
 elif [ "$SWITCH_STATE" == "0" ]; then
     /usr/bin/pactl --server $PULSE_SERVER set-sink-port sink.primary_output output-speaker
-    /usr/bin/pactl --server $PULSE_SERVER set-source-port source.record_24_primary_input input-builtin_mic
+    /usr/bin/pactl --server $PULSE_SERVER set-source-port source.surround_sound_primary_input input-builtin_mic
 fi

@@ -69,10 +69,17 @@ ro.bluetooth.sap=true
 ro.qualcomm.bt.hci_transport=smd
 
 # Camera
-camera.hal1.packagelist=com.skype.raider,com.google.android.talk
+camera.hal1.packagelist=com.ubuntu.camera,com.skype.raider,com.google.android.talk
 camera.display.umax=1920x1080
 camera.display.lmax=1280x720
 persist.camera.gyro.disable=0
+vidc.enc.dcvs.extra-buff-count=2
+media.camera.ts.monotonic=1
+persist.camera.isp.clock.optmz=0
+persist.camera.stats.test=5
+persist.camera.feature.cac=1
+persist.camera.imglib.cac3=2
+camera.lowpower.record.enable=1
 
 # Core control
 ro.core_ctl_min_cpu=2
@@ -188,3 +195,13 @@ ro.sys.fw.trim_enable_memory=2147483648
 
 # Wi-Fi
 wifi.interface=wlan0
+
+# Feature added for Ubuntu
+# Create zram disk
+ro.config.zram=true
+
+# Create Swap disk, if below sys-prop enabled & also if device has lower (< 1 GB) RAM
+ro.config.swap=true
+
+# SdcardFs
+ro.sys.sdcardfs=true

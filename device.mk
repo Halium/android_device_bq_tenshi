@@ -288,20 +288,23 @@ PRODUCT_COPY_FILES += \
 
 # UBPorts config files
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ubuntu/70-tenshi.rules:system/lib/udev/rules.d/70-tenshi.rules \
-    $(LOCAL_PATH)/ubuntu/tenshi.conf:system/etc/ubuntu-touch-session.d/tenshi.conf \
-    $(LOCAL_PATH)/ubuntu/anbox.sh:system/etc/init/anbox.sh \
-    $(LOCAL_PATH)/ubuntu/fix_pulseaudio.sh:system/etc/init/fix_pulseaudio.sh \
-    $(LOCAL_PATH)/ubuntu/fix_prop.sh:system/etc/init/fix_prop.sh \
-    $(LOCAL_PATH)/ubuntu/libs/libizat_core.so:system/lib/libizat_core.so \
-    $(LOCAL_PATH)/ubuntu/switch:system/halium/usr/share/h2w/switch \
-    #$(LOCAL_PATH)/ubuntu/timekeeper.conf:system/etc/init/timekeeper.conf \
-    $(LOCAL_PATH)/ubuntu/bluetooth-touch-tenshi.conf:system/etc/init/bluetooth-touch-tenshi.conf \
-    $(LOCAL_PATH)/ubuntu/droid-hcismd-up.sh:system/usr/share/bluetooth-touch/tenshi \
-    $(LOCAL_PATH)/ubuntu/apparmor.d/local/usr.bin.media-hub-server:system/etc/apparmor.d/local/usr.bin.media-hub-server \
-    $(LOCAL_PATH)/ubuntu/apparmor.d/abstractions/base:system/etc/apparmor.d/abstractions/base \
-    $(LOCAL_PATH)/ubuntu/ofono.override:system/etc/init/ofono.override
-    #$(LOCAL_PATH)/ubuntu/unblock_wakelock.sh:system/etc/unblock_wakelock.sh \
+    $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/lib/udev/rules.d/70-tenshi.rules \
+    $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/etc/udev/rules.d/70-tenshi.rules \
+    $(LOCAL_PATH)/system/halium/tenshi.conf:system/halium/etc/ubuntu-touch-session.d/tenshi.conf \
+    $(LOCAL_PATH)/system/halium/fix_pulseaudio.sh:system/halium/etc/init/fix_pulseaudio.sh \
+    $(LOCAL_PATH)/system/halium/fix_prop.sh:system/etc/fix_prop.sh \
+    $(LOCAL_PATH)/system/halium/libs/libizat_core.so:system/halium/lib/libizat_core.so \
+    $(LOCAL_PATH)/system/halium/switch:system/halium/usr/share/h2w/switch \
+    $(LOCAL_PATH)/system/halium/bluetooth-touch-tenshi.conf:system/halium/etc/init/bluetooth-touch-tenshi.conf \
+    $(LOCAL_PATH)/system/halium/wifi.conf:system/halium/etc/init/wifi.conf \
+    $(LOCAL_PATH)/system/halium/droid-hcismd-up.sh:system/halium/usr/share/bluetooth-touch/tenshi \
+    $(LOCAL_PATH)/system/halium/wifi_up.sh:system/halium/usr/share/bluetooth-touch/wifi_tenshi \
+    $(LOCAL_PATH)/system/halium/apparmor.d/local/usr.bin.media-hub-server:system/halium/etc/apparmor.d/local/usr.bin.media-hub-server \
+    $(LOCAL_PATH)/system/halium/apparmor.d/abstractions/base:system/halium/etc/apparmor.d/abstractions/base \
+    $(LOCAL_PATH)/system/halium/ofono.override:system/halium/etc/init/ofono.override \
+    $(LOCAL_PATH)/system/halium/unblock_wakelock.sh:system/halium/etc/unblock_wakelock.sh \
+    $(LOCAL_PATH)/system/halium/timekeeper.conf:system/halium/etc/init/timekeeper.conf \
+    #$(LOCAL_PATH)/system/halium/anbox.sh:system/halium/etc/init/anbox.sh \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.qti_bsp.abi=1
@@ -315,6 +318,8 @@ PRODUCT_PACKAGES += \
     libcameraservice \
     libdroidmedia \
     libcamera_compat_layer \
+    camera_service \
+    gst-droid \
     libmedia_compat_layer \
     libui_compat_layer \
     libsf_compat_layer \
