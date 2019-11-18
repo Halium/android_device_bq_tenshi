@@ -55,8 +55,8 @@ on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on fs
-    #write /dev/wcnss_wlan 1
-    #write /sys/module/wlan/parameters/fwpath "sta"
+    write /dev/wcnss_wlan 1
+    write /sys/module/wlan/parameters/fwpath "sta"
     wait /dev/block/bootdevice
     mount_all fstab.qcom
     write /proc/sys/vm/swappiness 100
@@ -784,7 +784,7 @@ service minisf /system/bin/minisfservice
     user system
     group graphics
 
-service init_bt /system/bin/sh /system/halium/usr/share/bluetooth-touch/tenshi
+service init_fix_prop /system/bin/sh /system/halium/etc/init/fix_prop.sh
     class main
     user root
     group root
@@ -792,6 +792,18 @@ service init_bt /system/bin/sh /system/halium/usr/share/bluetooth-touch/tenshi
 
 service init_wifi /system/bin/sh /system/halium/usr/share/bluetooth-touch/wifi_tenshi
     class main
+    user root
+    group root
+    oneshot
+
+service init_bt /system/bin/sh /system/halium/usr/share/bluetooth-touch/tenshi
+    class late_start
+    user root
+    group root
+    oneshot
+
+service init_audio /system/bin/sh /system/halium/etc/init/fix_pulseaudio.sh
+    class late_start
     user root
     group root
     oneshot

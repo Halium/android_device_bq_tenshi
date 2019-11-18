@@ -292,10 +292,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/etc/udev/rules.d/70-tenshi.rules \
     $(LOCAL_PATH)/system/halium/tenshi.conf:system/halium/etc/ubuntu-touch-session.d/tenshi.conf \
     $(LOCAL_PATH)/system/halium/fix_pulseaudio.sh:system/halium/etc/init/fix_pulseaudio.sh \
-    $(LOCAL_PATH)/system/halium/fix_prop.sh:system/etc/fix_prop.sh \
+    $(LOCAL_PATH)/system/halium/fix_prop.sh:system/halium/etc/init/fix_prop.sh \
     $(LOCAL_PATH)/system/halium/libs/libizat_core.so:system/halium/lib/libizat_core.so \
     $(LOCAL_PATH)/system/halium/switch:system/halium/usr/share/h2w/switch \
-    $(LOCAL_PATH)/system/halium/bluetooth-touch-tenshi.conf:system/halium/etc/init/bluetooth-touch-tenshi.conf \
     $(LOCAL_PATH)/system/halium/wifi.conf:system/halium/etc/init/wifi.conf \
     $(LOCAL_PATH)/system/halium/droid-hcismd-up.sh:system/halium/usr/share/bluetooth-touch/tenshi \
     $(LOCAL_PATH)/system/halium/wifi_up.sh:system/halium/usr/share/bluetooth-touch/wifi_tenshi \
@@ -304,7 +303,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/system/halium/ofono.override:system/halium/etc/init/ofono.override \
     $(LOCAL_PATH)/system/halium/unblock_wakelock.sh:system/halium/etc/unblock_wakelock.sh \
     $(LOCAL_PATH)/system/halium/timekeeper.conf:system/halium/etc/init/timekeeper.conf \
-    #$(LOCAL_PATH)/system/halium/anbox.sh:system/halium/etc/init/anbox.sh \
+    $(LOCAL_PATH)/system/halium/anbox.sh:system/halium/etc/init/anbox.sh \
+    #$(LOCAL_PATH)/system/halium/bluetooth-touch-tenshi.conf:system/halium/etc/init/bluetooth-touch-tenshi.conf \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.qti_bsp.abi=1
