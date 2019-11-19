@@ -289,7 +289,9 @@ PRODUCT_COPY_FILES += \
 # UBPorts config files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/lib/udev/rules.d/70-tenshi.rules \
+    $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/lib/udev/rules.d/70-android.rules \
     $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/etc/udev/rules.d/70-tenshi.rules \
+    $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/etc/udev/rules.d/70-android.rules \
     $(LOCAL_PATH)/system/halium/tenshi.conf:system/halium/etc/ubuntu-touch-session.d/tenshi.conf \
     $(LOCAL_PATH)/system/halium/fix_pulseaudio.sh:system/halium/etc/init/fix_pulseaudio.sh \
     $(LOCAL_PATH)/system/halium/fix_prop.sh:system/halium/etc/init/fix_prop.sh \
