@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# Copy udev rules on rootfs
-mount -o remount,rw /
-ln -s /system/halium/etc/udev/rules.d/70-tenshi.rules /etc/udev/rules.d/
-
 # One shot creation of /run/user/32011
 mkdir -p /run/user/32011
 chown phablet /run/user/32011
