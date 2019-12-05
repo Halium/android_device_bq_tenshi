@@ -169,4 +169,4 @@ ACTION=="add", KERNEL=="block/platform/soc/7824900.sdhci/by-name/config", OWNER=
 ACTION=="add", KERNEL=="block/platform/soc/7464900.sdhci/by-name/frp", OWNER="system", GROUP="system", MODE="0600"
 ACTION=="add", KERNEL=="block/platform/soc/624000.ufshc/by-name/frp", OWNER="system", GROUP="system", MODE="0600"
 ACTION=="add", KERNEL=="fingerprint", OWNER="system", GROUP="input", MODE="0664"
-ACTION=="change", DEVPATH=="/sys/devices/virtual/switch/h2w", SUBSYSTEM=="switch", RUN+="/system/bin/bash /system/halium/usr/share/h2w/switch"
+ACTION=="change", DEVPATH=="/sys/devices/virtual/switch/h2w", SUBSYSTEM=="switch", RUN+="/system/bin/sh /system/halium/usr/share/h2w/switch"
