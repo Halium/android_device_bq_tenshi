@@ -24,5 +24,4 @@ elif [ "$SWITCH_STATE" == "0" ]; then
     /usr/bin/pactl --server $PULSE_SERVER set-sink-port sink.primary_output output-parking 
     /usr/bin/pactl --server $PULSE_SERVER set-sink-port sink.primary_output output-speaker
     /usr/bin/pactl --server $PULSE_SERVER set-sink-volume sink.primary_output 200
-    /usr/bin/pactl --server $PULSE_SERVER set-source-port source.surround_sound_primary_input input-builtin_mic
 fi

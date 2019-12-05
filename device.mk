@@ -111,6 +111,14 @@ PRODUCT_PACKAGES += \
     Snap \
     libcamera_shim
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/camera/camera_config.xml:system/etc/camera/camera_config.xml \
+    $(LOCAL_PATH)/configs/camera/ov5675_d5v15b_chromatix.xml:system/etc/camera/ov5675_d5v15b_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/ov5670_f5670bq_chromatix.xml:system/etc/camera/ov5670_f5670bq_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/ov8856_chromatix.xml:system/etc/camera/ov8856_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/s5k3p3sm_chromatix.xml:system/etc/camera/s5k3p3sm_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/s5k3p3_chromatix.xml:system/etc/camera/s5k3p3_chromatix.xml
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES  += \
      persist.camera.shutter.disable=1 \
      camera.disable_zsl_mode=1 \
@@ -133,6 +141,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fingerprint.msm8937 \
     fingerprintd
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.qfp=false
 
 # FM
 PRODUCT_PACKAGES += \
@@ -288,16 +299,12 @@ PRODUCT_COPY_FILES += \
 
 # UBPorts config files
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/lib/udev/rules.d/70-tenshi.rules \
     $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/lib/udev/rules.d/70-android.rules \
-    $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/etc/udev/rules.d/70-tenshi.rules \
-    $(LOCAL_PATH)/system/halium/70-tenshi.rules:system/halium/etc/udev/rules.d/70-android.rules \
     $(LOCAL_PATH)/system/halium/tenshi.conf:system/halium/etc/ubuntu-touch-session.d/tenshi.conf \
-    $(LOCAL_PATH)/system/halium/fix_pulseaudio.sh:system/halium/etc/init/fix_pulseaudio.sh \
-    $(LOCAL_PATH)/system/halium/fix_prop.sh:system/halium/etc/init/fix_prop.sh \
+    $(LOCAL_PATH)/system/halium/fix_pulseaudio.sh:system/halium/usr/share/fixup/fix_pulseaudio.sh \
+    $(LOCAL_PATH)/system/halium/fix_prop.sh:system/halium/usr/share/fixup/fix_prop.sh \
     $(LOCAL_PATH)/system/halium/libs/libizat_core.so:system/halium/lib/libizat_core.so \
     $(LOCAL_PATH)/system/halium/switch:system/halium/usr/share/h2w/switch \
-    $(LOCAL_PATH)/system/halium/wifi.conf:system/halium/etc/init/wifi.conf \
     $(LOCAL_PATH)/system/halium/droid-hcismd-up.sh:system/halium/usr/share/bluetooth-touch/tenshi \
     $(LOCAL_PATH)/system/halium/wifi_up.sh:system/halium/usr/share/bluetooth-touch/wifi_tenshi \
     $(LOCAL_PATH)/system/halium/apparmor.d/local/usr.bin.media-hub-server:system/halium/etc/apparmor.d/local/usr.bin.media-hub-server \
@@ -306,10 +313,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/system/halium/unblock_wakelock.sh:system/halium/etc/unblock_wakelock.sh \
     $(LOCAL_PATH)/system/halium/timekeeper.conf:system/halium/etc/init/timekeeper.conf \
     $(LOCAL_PATH)/system/halium/anbox.sh:system/halium/etc/init/anbox.sh \
-    #$(LOCAL_PATH)/system/halium/bluetooth-touch-tenshi.conf:system/halium/etc/init/bluetooth-touch-tenshi.conf \
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.qti_bsp.abi=1
+    ro.build.qti_bsp.abi=1 \
+    ubuntu.widi.supported=1 \
 
 # Ubuntu
 PRODUCT_PACKAGES += \
@@ -340,4 +347,6 @@ MINIMEDIA_SENSORSERVER_DISABLE := 1
 # telepathy-ofono quirks
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.t-o.quirk.forcesink=sink.primary_output \
-    ro.t-o.quirk.forcesource=source.primary_input
+    ro.t-o.quirk.forcesource=source.primary_input \
+
+

@@ -392,6 +392,9 @@ on boot
     chown system system /sys/class/leds/red/led_time
     chown system system /sys/class/leds/green/led_time
 
+    # To allow GUI 
+    mkdir /run/user/32011 0700 phablet
+
 service iop /system/bin/iop
     class main
     user root
@@ -784,14 +787,14 @@ service minisf /system/bin/minisfservice
     user system
     group graphics
 
-service init_fix_prop /system/bin/sh /system/halium/etc/init/fix_prop.sh
-    class main
-    user root
-    group root
+service init_fix_prop /system/bin/sh /system/halium/usr/share/fixup/fix_prop.sh
+    class late_start
+    user system
+    group system
     oneshot
 
 service init_wifi /system/bin/sh /system/halium/usr/share/bluetooth-touch/wifi_tenshi
-    class main
+    class late_start
     user root
     group root
     oneshot
@@ -802,8 +805,3 @@ service init_bt /system/bin/sh /system/halium/usr/share/bluetooth-touch/tenshi
     group root
     oneshot
 
-service init_audio /system/bin/sh /system/halium/etc/init/fix_pulseaudio.sh
-    class late_start
-    user root
-    group root
-    oneshot
