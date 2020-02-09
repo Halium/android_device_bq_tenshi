@@ -38,7 +38,10 @@ TARGET_BOOTLOADER_BOARD_NAME := msm8937
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlycon=msm_hsl_uart,0x78B0000 selinux=0 systempart=/dev/mmcblk0p24 datapart=/dev/mmcblk0p46
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlycon=msm_hsl_uart,0x78B0000 audit=0 
+BOARD_KERNEL_CMDLINE += datapart=/dev/mmcblk0p46 
+BOARD_KERNEL_CMDLINE += security=apparmor androidboot.selinux=permissive enforcing=0 apparmor=1 selinux=0
+# BOARD_KERNEL_CMDLINE += systempart=/dev/mmcblk0p24A
 
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
@@ -115,6 +118,8 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_HEALTHD_CUSTOM_CHARGER_RES := $(PLATFORM_PATH)/charger/images
+#BOARD_CHARGER_SHOW_PERCENTAGE := true
+#BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # CMHW
 BOARD_USES_CYANOGEN_HARDWARE := true
@@ -188,6 +193,11 @@ TARGET_PROVIDES_LIBLIGHT := true
 # Media Extensions
 TARGET_USES_MEDIA_EXTENSIONS := true
 
+# Partitions types
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+
 # Peripheral manager
 TARGET_PER_MGR_ENABLED := true
 
@@ -222,8 +232,9 @@ BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
 BOARD_WLAN_DEVICE                := qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
-WIFI_DRIVER_FW_PATH_AP           := "ap"
-WIFI_DRIVER_FW_PATH_STA          := "sta"
+#WIFI_DRIVER_FW_PATH_AP          := "ap"
+#WIFI_DRIVER_FW_PATH_STA         := "sta"
+#WIFI_DRIVER_FW_PATH_P2P 	 := "p2p"
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 
 # inherit from the proprietary version
