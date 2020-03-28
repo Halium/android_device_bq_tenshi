@@ -160,8 +160,17 @@ ro.vendor.gt_library=libqti-gt.so
 ro.cutoff_voltage_mv=3400
 ro.emmc_size=16GB
 
+# NFC (to be tested)
+persist.nfc.smartcard.config=SIM1
+ro.hardware.nfc_nci=nqx.default
+ro.nfc.port=I2C
+ro.se.type=HCE,UICC
+
 # Qualcomm
 ro.qualcomm.cabl=2
+
+# QMI
+persist.data.qmi.adb_logmask=0
 
 # RIL
 ril.num_slots=2

@@ -261,13 +261,9 @@ PRODUCT_PACKAGES += \
 # Last entry
 
 PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-#    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
-#    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/configs/media_codecs_8937.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_codecs_performance_8937.xml:system/etc/media_codecs_performance.xml \
-    $(LOCAL_PATH)/configs/media_profiles_8937.xml:system/etc/media_profiles.xml \
-# Latest 3 entries to try to fix media-hub playback
+    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
@@ -353,7 +349,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/system/halium/wifi_up.sh:system/halium/usr/share/bluetooth-touch/wifi_tenshi \
     $(LOCAL_PATH)/system/halium/apparmor.d/local/usr.bin.media-hub-server:system/halium/etc/apparmor.d/local/usr.bin.media-hub-server \
     $(LOCAL_PATH)/system/halium/apparmor.d/abstractions/base:system/halium/etc/apparmor.d/abstractions/base \
+    $(LOCAL_PATH)/system/halium/apparmor.d/hardware/video.d/apparmor-easyprof-ubuntu_android:system/halium/etc/apparmor.d/hardware/video.d/apparmor-easyprof-ubuntu_android \
+    $(LOCAL_PATH)/system/halium/apparmor.d/hardware/graphics.d/apparmor-easyprof-ubuntu_android:system/halium/etc/apparmor.d/hardware/graphics.d/apparmor-easyprof-ubuntu_android \
     $(LOCAL_PATH)/system/halium/ofono.override:system/halium/etc/init/ofono.override \
+    $(LOCAL_PATH)/system/halium/usensord.conf:system/halium/usr/share/upstart/sessions/usensord.conf \
     $(LOCAL_PATH)/system/halium/unblock_wakelock.sh:system/halium/etc/unblock_wakelock.sh \
     $(LOCAL_PATH)/system/halium/timekeeper.conf:system/halium/etc/init/timekeeper.conf \
     $(LOCAL_PATH)/system/halium/charger/images/battery_fail.png:system/halium/charger/images/battery_fail.png \
@@ -362,28 +361,39 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.qti_bsp.abi=1 \
     ubuntu.widi.supported=1 \
+    ro.qc.sensors.wl_dis=true \
 
 # Ubuntu
 PRODUCT_PACKAGES += \
     libubuntu_application_api \
+    libubuntu_application_api_32 \
     direct_ubuntu_application_sensors_c_api_for_hybris_test \
     direct_ubuntu_application_sensors_for_hybris_test \
     direct_ubuntu_application_gps_c_api_for_hybris_test \
     libcameraservice \
+    libcameraservice_32 \
     libdroidmedia \
+    libdroidmedia_32 \
     libcamera_compat_layer \
+    libcamera_compat_layer_32 \
     camera_service \
     gst-droid \
     libmedia_compat_layer \
+    libmedia_compat_layer_32 \
     libui_compat_layer \
+    libui_compat_layer_32 \
     libsf_compat_layer \
+    libsf_compat_layer_32 \
     minimediaservice \
     minisfservice \
     libminisf \
+    libminisf_32 \
     libaudioflingerglue \
+    libaudioflingerglue_32 \
     miniafservice
 
-#PRODUCT_PACKAGES += \
+# Charging animation and images
+PRODUCT_PACKAGES += \
     charger_res_images
 
 # Droidmedia
