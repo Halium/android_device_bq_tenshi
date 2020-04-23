@@ -6,14 +6,26 @@
 MAXTRIES=15
 
 #fix wlan
-j=1
-while [ ! $j -gt $MAXTRIES ]  ; do
-    insmod /system/lib/modules/wlan.ko
-    if [ "$?" -ne "0" ]; then
-      sleep 1
+#j=1
+#while [ ! $j -gt $MAXTRIES ]  ; do
+#    insmod /system/lib/modules/wlan.ko
+#    if [ "$?" -ne "0" ]; then
+#      sleep 1
+#    fi
+#    
+#    j=$((j + 1))
+#done
+
+while true; do
+    sleep 2
+    if [ ! -f /sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/address ]; then
+        echo 1 > /dev/wcnss_wlan
+        echo sta > /sys/module/wlan/parameters/fwpath
+    else
+        # enable bluetooth here since we have to wait for wlan to be initialized
+        #enable_bt
+        break
     fi
-    
-    j=$((j + 1))
 done
 
 #setprop bluetooth.hciattach true

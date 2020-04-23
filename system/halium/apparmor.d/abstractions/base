@@ -21,6 +21,7 @@
   # and localisations of date should be available EVERYWHERE, so
   # StackGuard, FormatGuard, etc., alerts can be properly logged.
   /dev/log                       w,
+  /dev/pmsg0                     w,
   /dev/random                    r,
   /dev/urandom                   r,
   /etc/locale/**                 r,
@@ -42,6 +43,7 @@
   # anything when reading so this is ok.
   /{,var/}run/systemd/journal/stdout rw,
 
+  /usr/lib{,32,64}/arm-linux-gnueabihf/**  mr,
   /usr/lib{,32,64}/locale/**             mr,
   /usr/lib{,32,64}/gconv/*.so            mr,
   /usr/lib{,32,64}/gconv/gconv-modules*  mr,
@@ -110,6 +112,9 @@
   # recent glibc uses /dev/full in preference to /dev/null for programs
   # that don't have open fds at exec()
   /dev/full                      rw,
+  /dev/tty                       rw,
+  /socket/property_service       rw,
+  /socket/logdw                  rw,
 
   # Sometimes used to determine kernel/user interfaces to use
   @{PROC}/sys/kernel/version     r,
@@ -123,6 +128,21 @@
   @{PROC}/cpuinfo                r,
   /sys/devices/system/cpu/online r,
 
+  # Currently, AppArmor does not work properly yet, so this is a list of
+  # things to be whitelisted:
+  @{PROC}/vmstat                 r,
+  @{PROC}/@{pid}/loginuid        r,
+  @{PROC}/@{pid}/task/@{tid}/status r,
+  @{PROC}/@{pid}/mounts          r,
+  /sys/devices/soc0/soc_id       r,
+  /sys/devices/soc/1a00000.qcom,mdss_mdp/caps r,
+  @{HOME}/**                     rw,
+  /dev/disk/by-label/            r,
+  /opt/**                        r,
+  /etc/passwd                    r,
+  /etc/nsswitch.conf             r,
+  /var/lib/extrausers/passwd     r,
+
   # glibc's *printf protections read the maps file
   @{PROC}/@{pid}/maps            r,
 
@@ -131,6 +151,8 @@
 
   # some applications will display license information
   /usr/share/common-licenses/**  r,
+  # some applications need translations
+  /usr/share/qt5/translations/** r,
 
   # glibc statvfs
   @{PROC}/filesystems            r,
@@ -189,4 +211,4 @@
   # encrypted ~/.Private and old-style encrypted $HOME
   owner @{HOME}/.Private/** mrixwlk,
   # new-style encrypted $HOME
-  owner @{HOMEDIRS}/.ecryptfs/*/.Private/** mrixwlk,
+owner @{HOMEDIRS}/.ecryptfs/*/.Private/** mrixwlk,
