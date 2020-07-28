@@ -358,6 +358,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/system/halium/timekeeper.conf:system/halium/etc/init/timekeeper.conf \
     $(LOCAL_PATH)/system/halium/charger/images/battery_fail.png:system/halium/charger/images/battery_fail.png \
     $(LOCAL_PATH)/system/halium/charger/images/battery_scale.png:system/halium/charger/images/battery_scale.png \
+    $(LOCAL_PATH)/system/halium/wlan_restart.py:system/halium/usr/share/fixup/wlan_restart/wlan_restart.py \
+    $(LOCAL_PATH)/system/halium/mtp-state.conf:system/halium/etc/init/mtp-state.conf \
+    $(LOCAL_PATH)/system/halium/setupusb:system/halium/usr/share/usbinit/setupusb \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.qti_bsp.abi=1 \
