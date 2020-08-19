@@ -26,6 +26,7 @@
 #
 
 on init
+    mkdir -p /sys/class/android_usb/
     write /sys/class/android_usb/android0/f_rndis/wceis 1
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
 

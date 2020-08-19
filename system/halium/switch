@@ -7,6 +7,7 @@ PULSE_SERVER="unix:/run/user/32011/pulse/native"
 export PULSE_COOKIE=/home/phablet/.config/pulse/cookie
 
 /usr/bin/pactl --server $PULSE_SERVER set-card-profile droid_card.primary voicecall 
+/usr/bin/pactl --server $PULSE_SERVER set-sink-volume sink.primary_output 65000
 
 #headset without mic
 if [ "$SWITCH_STATE" == "2" ]; then

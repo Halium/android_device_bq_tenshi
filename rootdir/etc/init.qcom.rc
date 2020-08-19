@@ -37,6 +37,21 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
+on charger
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    wait /dev/block/bootdevice
+
+    # Setup zram options
+    write /sys/block/zram0/comp_algorithm lz4
+
+service charger /sbin/healthd -c
+    class charger
+    critical
+    seclabel u:r:healthd:s0
+
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 root system
@@ -53,6 +68,9 @@ on init
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
 
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
+
+    # MTP, RNDIS
+    mkdir /sys/class/android_usb 0750 root system
 
 on fs
     write /dev/wcnss_wlan 1
@@ -392,6 +410,12 @@ on boot
     chown system system /sys/class/leds/red/led_time
     chown system system /sys/class/leds/green/led_time
 
+# Test for auto-brightness    
+    chown system system /sys/devices/soc/1a00000.qcom,mdss_mdp/1a00000.qcom,mdss_mdp:qcom,mdss_fb_primary/leds/lcd-backlight/brightness
+    chmod 0666 /sys/devices/soc/1a00000.qcom,mdss_mdp/1a00000.qcom,mdss_mdp:qcom,mdss_fb_primary/leds/lcd-backlight/brightness
+    chown system system /sys/devices/soc/qpnp-wled-20/leds/wled/brightness
+    chmod 0666 /sys/devices/soc/qpnp-wled-20/leds/wled/brightness
+
     # To allow GUI 
     mkdir /run/user/32011 0700 phablet
 
@@ -622,6 +646,7 @@ service fingerprintd /system/bin/fingerprintd
     socket fpce stream 0666 system system
     user  system
     group system sdcard_rw
+    writepid /dev/cpuset/camera-daemon/tasks
 
 # Start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon

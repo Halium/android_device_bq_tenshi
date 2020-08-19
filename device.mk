@@ -168,6 +168,7 @@ PRODUCT_COPY_FILES += \
 # Fingerprint
 PRODUCT_PACKAGES += \
     fingerprint.msm8937 \
+    lib_fpc_tac_shared \
     fingerprintd
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -365,6 +366,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.qti_bsp.abi=1 \
     ubuntu.widi.supported=1 \
+    ro.qc.sensors.wl_dis=true \
 
 # Ubuntu
 PRODUCT_PACKAGES += \
