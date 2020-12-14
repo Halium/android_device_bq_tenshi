@@ -646,13 +646,13 @@ service fingerprintd /system/bin/fingerprintd
     socket fpce stream 0666 system system
     user  system
     group system sdcard_rw
-    writepid /dev/cpuset/camera-daemon/tasks
 
 # Start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
+    writepid /dev/cpuset/camera-daemon/tasks
 
 # Allow usb charging to be disabled peristently
 on property:persist.usb.chgdisabled=1
@@ -830,3 +830,5 @@ service init_bt /system/bin/sh /system/halium/usr/share/bluetooth-touch/tenshi
     group root
     oneshot
 
+service mtservice /system/bin/mtd
+    class late_start
