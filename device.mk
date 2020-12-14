@@ -206,8 +206,8 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.sh \
     init.qcom.usb.rc \
+    init.qcom.recovery.rc \
     init.target.rc \
-    init.recovery.rc \
     ueventd.qcom.rc
 
 # IPA Manager
