@@ -248,6 +248,11 @@ on post-fs-data
     mkdir /data/system/swap 0770 root system
     chmod 2770 /data/system/swap
 
+    # Create cache in /data/cache
+    mkdir /data/cache
+    mount none /data/cache /cache bind
+    mkdir /data/cache/recovery
+
     # Tap to Wake
     chown root system /sys/android_touch/wakeup_gesture_enable
     chmod 0660 /sys/android_touch/wakeup_gesture_enable
