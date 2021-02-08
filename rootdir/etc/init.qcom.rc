@@ -27,6 +27,7 @@
 
 import init.qcom.usb.rc
 import init.target.rc
+import init.recovery.qcom.rc
 
 on early-init
     mkdir /firmware 0771 system system
